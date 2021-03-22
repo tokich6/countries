@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react';
-import { Box, Flex, Spacer, VStack, Input, InputGroup, InputLeftElement, Select } from "@chakra-ui/react";
+import { Box, Flex, Spacer, VStack, Input, InputGroup, 
+  InputLeftElement, Select, useColorMode} from "@chakra-ui/react";
 import { FaSearch } from 'react-icons/fa';
 
 
 const Search = () => {
+
   const [isMobile, setMobile] = useState(window.innerWidth < 670);
   const [country, setCountry] = useState("");
   const [region, setRegion] = useState("");
@@ -26,12 +28,12 @@ const Search = () => {
   console.log(region);
 
   
-
+  const { colorMode } = useColorMode();
   return (
     <>
       { isMobile ? (
         <VStack spacing={6}>
-          <InputGroup >
+          <InputGroup bg={colorMode === 'dark' ? 'hsl(209, 23%, 22%)' : 'hsl(0, 0%, 100%)'} >
             <InputLeftElement
               pointerEvents="none"
               children={<FaSearch color="gray.300" />}
@@ -40,7 +42,7 @@ const Search = () => {
           </InputGroup>
 
 
-          <Select placeholder="Filter by Region" value={region} onChange={getRegion} >
+          <Select placeholder="Filter by Region" value={region} onChange={getRegion} bg={colorMode === 'dark' ? 'hsl(209, 23%, 22%)' : 'hsl(0, 0%, 100%)'}>
             <option value="Africa">Africa</option>
             <option value="America">America</option>
             <option value="Asia">Asia</option>
@@ -54,7 +56,7 @@ const Search = () => {
 
           <Flex p={6}>
             <Box w={450}>
-              <InputGroup>
+              <InputGroup bg={colorMode === 'dark' ? 'hsl(209, 23%, 22%)' : 'hsl(0, 0%, 100%)'}>
                 <InputLeftElement
                   pointerEvents="none"
                   children={<FaSearch color="gray.300" />}
@@ -65,7 +67,7 @@ const Search = () => {
 
             <Spacer />
             <Box>
-              <Select placeholder="Filter by Region" value={region} onChange={getRegion}>
+              <Select placeholder="Filter by Region" value={region} onChange={getRegion} bg={colorMode === 'dark' ? 'hsl(209, 23%, 22%)' : 'hsl(0, 0%, 100%)'}>
                 <option value="Africa">Africa</option>
                 <option value="America">America</option>
                 <option value="Asia">Asia</option>
