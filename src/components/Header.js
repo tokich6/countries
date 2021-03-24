@@ -1,16 +1,22 @@
-import { Flex, Spacer, useColorMode } from "@chakra-ui/react";
+import { Flex, Heading, Spacer, useColorMode } from "@chakra-ui/react";
 import { ColorModeSwitcher } from '../ColorModeSwitcher';
 
 
 const Header = () => {
-  const {colorMode} = useColorMode();
+
+  const { colorMode } = useColorMode();
+  const bgColor = {light: 'hsl(0, 0%, 100%)', dark: 'hsl(209, 23%, 22%)'};
+
   return (
     <>
       <Flex 
-      p={4}
-      bg={colorMode === 'dark' ? 'hsl(209, 23%, 22%)' : 'hsl(0, 0%, 100%)'}
+      px={16}
+      py={4}
+      bg={bgColor[colorMode]}
+      boxShadow='md'
+      alignItems='baseline'
       >
-      <h1>Where in the world? </h1>
+      <Heading fontSize='lg'>Where in the world? </Heading>
       <Spacer />
       <ColorModeSwitcher />
       </Flex>

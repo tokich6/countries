@@ -26,33 +26,27 @@ const Search = () => {
   console.log(region);
 
   const { colorMode } = useColorMode();
-  const handleBgColor = () => {
-    if (colorMode === 'dark') {
-      return 'hsl(209, 23%, 22%)';
-    } else {
-      return 'hsl(0, 0%, 100%)';
-    }
-  }
+  const bgColor = {light: 'hsl(0, 0%, 100%)', dark: 'hsl(209, 23%, 22%)'};
 
 
   return (
     <>
       { isMobile ? (
         <VStack spacing={8}>
-          <CustomInput value={country} handleChange={getCountry} bg={handleBgColor} />
-          <Regions regionValue={region} handleRegion={getRegion} bg={handleBgColor} />
+          <CustomInput value={country} handleChange={getCountry} bg={bgColor[colorMode]} />
+          <Regions regionValue={region} handleRegion={getRegion} bg={bgColor[colorMode]} />
         </VStack>
       )
         :
         (
           <Flex p={6}>
             <Box w={450}>
-              <CustomInput value={country} handleChange={getCountry} bg={handleBgColor} />
+              <CustomInput value={country} handleChange={getCountry} bg={bgColor[colorMode]} />
             </Box>
 
             <Spacer />
             <Box>
-              <Regions regionValue={region} handleRegion={getRegion} bg={handleBgColor} />
+              <Regions regionValue={region} handleRegion={getRegion} bg={bgColor[colorMode]} />
             </Box>
           </Flex>
         )

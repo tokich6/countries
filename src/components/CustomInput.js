@@ -5,7 +5,7 @@ const CustomInput = ({ value, handleChange, bg}) => {
 
   return (
     <>
-      <InputGroup bg={bg}>
+      <InputGroup bg={bg} boxShadow='sm'>
         <InputLeftElement
           pointerEvents="none"
           children={<FaSearch color="gray.300" />}
