@@ -1,4 +1,3 @@
-// import React from 'react';
 import { useState, useEffect } from 'react';
 import {
   ChakraProvider,
@@ -15,16 +14,19 @@ import theme from "./theme";
 function App() {
   const [countries, setCountries] = useState([]);
 
-  useEffect(async () => {
-    const response = await fetch('https://restcountries.eu/rest/v2/all');
-    const data = await response.json();
-    return setCountries(data);
+  useEffect(() => {
+    async function fetchData() {
+      const response = await fetch('https://restcountries.eu/rest/v2/all');
+      const data = await response.json();
+      return setCountries(data);
+    }
+    fetchData();
   }, []);
 
   console.log(countries);
 
-
   const { colorMode } = useColorMode();
+
   return (
     <ChakraProvider theme={theme} >
       <Box bg={colorMode === 'dark' ? 'hsl(207, 26%, 17%)' : 'hsl(0, 0%, 98%)'}>

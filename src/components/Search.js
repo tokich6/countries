@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
-import { Box, Flex, Spacer, VStack, Input, InputGroup, 
-  InputLeftElement, Select, useColorMode} from "@chakra-ui/react";
-import { FaSearch } from 'react-icons/fa';
+import { Box, Flex, Spacer, VStack, useColorMode } from "@chakra-ui/react";
+import CustomInput from './CustomInput';
+import Regions from '../components/Regions';
 
 
 const Search = () => {
@@ -19,61 +19,40 @@ const Search = () => {
     return () => window.removeEventListener("resize", updateMedia);
   });
 
-  const getCountry = (event) => {
-    setCountry(event.target.value);
-  }
+  const getCountry = event => setCountry(event.target.value);
   console.log(country);
 
   const getRegion = (event) => setRegion(event.target.value);
   console.log(region);
 
-  
   const { colorMode } = useColorMode();
+  const handleBgColor = () => {
+    if (colorMode === 'dark') {
+      return 'hsl(209, 23%, 22%)';
+    } else {
+      return 'hsl(0, 0%, 100%)';
+    }
+  }
+
+
   return (
     <>
       { isMobile ? (
-        <VStack spacing={6}>
-          <InputGroup bg={colorMode === 'dark' ? 'hsl(209, 23%, 22%)' : 'hsl(0, 0%, 100%)'} >
-            <InputLeftElement
-              pointerEvents="none"
-              children={<FaSearch color="gray.300" />}
-            />
-            <Input placeholder=" Search for a country..." variant="outline" onChange={getCountry} value={country} />
-          </InputGroup>
-
-
-          <Select placeholder="Filter by Region" value={region} onChange={getRegion} bg={colorMode === 'dark' ? 'hsl(209, 23%, 22%)' : 'hsl(0, 0%, 100%)'}>
-            <option value="Africa">Africa</option>
-            <option value="America">America</option>
-            <option value="Asia">Asia</option>
-            <option value="Europe">Europe</option>
-            <option value="Oceania">Oceania</option>
-          </Select>
+        <VStack spacing={8}>
+          <CustomInput value={country} handleChange={getCountry} bg={handleBgColor} />
+          <Regions regionValue={region} handleRegion={getRegion} bg={handleBgColor} />
         </VStack>
       )
-
-        : (
-
+        :
+        (
           <Flex p={6}>
             <Box w={450}>
-              <InputGroup bg={colorMode === 'dark' ? 'hsl(209, 23%, 22%)' : 'hsl(0, 0%, 100%)'}>
-                <InputLeftElement
-                  pointerEvents="none"
-                  children={<FaSearch color="gray.300" />}
-                />
-                <Input placeholder=" Search for a country..." variant="outline" onChange={getCountry} value={country} />
-              </InputGroup>
+              <CustomInput value={country} handleChange={getCountry} bg={handleBgColor} />
             </Box>
 
             <Spacer />
             <Box>
-              <Select placeholder="Filter by Region" value={region} onChange={getRegion} bg={colorMode === 'dark' ? 'hsl(209, 23%, 22%)' : 'hsl(0, 0%, 100%)'}>
-                <option value="Africa">Africa</option>
-                <option value="America">America</option>
-                <option value="Asia">Asia</option>
-                <option value="Europe">Europe</option>
-                <option value="Oceania">Oceania</option>
-              </Select>
+              <Regions regionValue={region} handleRegion={getRegion} bg={handleBgColor} />
             </Box>
           </Flex>
         )
