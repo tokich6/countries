@@ -1,17 +1,14 @@
 import { useState, useEffect } from 'react';
 import {
   ChakraProvider,
-  Box,
-  Text,
-  VStack,
   Wrap,
-  WrapItem,
-  useColorMode,
+  Container,
 } from '@chakra-ui/react';
 import Header from './components/Header';
 import Search from './components/Search';
 import Card from './components/Card';
-import theme from "./theme";
+import Fonts from "./styles/Fonts";
+import { customTheme } from "./styles/theme";
 
 function App() {
   const [countries, setCountries] = useState([]);
@@ -27,34 +24,32 @@ function App() {
 
   console.log(countries);
 
-  const { colorMode } = useColorMode();
-  const bgColor = {light: 'hsl(0, 0%, 98%)', dark: 'hsl(207, 26%, 17%)'};
-  const textColor = {light: 'hsl(200, 15%, 8%)', dark: 'hsl(0, 0%, 100%)'}; 
 
   function formatNumber(num) {
     return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
   }
 
   return (
-    <ChakraProvider theme={theme}>
-      <Box>
-        <Header />
-        <Search />
-          <Wrap spacing="50px" justify="center" mt='5'>
-              {
-                countries.map((country, index) => (
-                  <Card
-                    key={index}
-                    flag={country.flag}
-                    name={country.name}
-                    population={formatNumber(country.population)}
-                    region={country.region}
-                    capital={country.capital}
-                  />
-                )
-                )}
-          </Wrap>
-      </Box>
+    <ChakraProvider theme={customTheme}>
+    <Fonts />
+      <Header />
+      <Container maxW="container.xl" centerContent >
+        <Search  />
+        <Wrap spacing="50px" justify="center" mt='5'>
+          {
+            countries.map((country, index) => (
+              <Card
+                key={index}
+                flag={country.flag}
+                name={country.name}
+                population={formatNumber(country.population)}
+                region={country.region}
+                capital={country.capital}
+              />
+            )
+            )}
+        </Wrap>
+      </Container>
     </ChakraProvider>
   );
 }

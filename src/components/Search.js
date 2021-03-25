@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Box, Flex, Spacer, VStack, useColorMode } from "@chakra-ui/react";
+import { Box, Flex, HStack, Spacer, VStack, useColorMode } from "@chakra-ui/react";
 import CustomInput from './CustomInput';
 import Regions from '../components/Regions';
 
@@ -39,7 +39,7 @@ const Search = () => {
       )
         :
         (
-          <Flex p={6}>
+          <HStack p={6} w='100%'>
             <Box w={450}>
               <CustomInput value={country} handleChange={getCountry} bg={bgColor[colorMode]} />
             </Box>
@@ -48,7 +48,7 @@ const Search = () => {
             <Box>
               <Regions regionValue={region} handleRegion={getRegion} bg={bgColor[colorMode]} />
             </Box>
-          </Flex>
+          </HStack>
         )
       }
     </>
