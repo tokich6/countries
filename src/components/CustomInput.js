@@ -10,7 +10,12 @@ const CustomInput = ({ value, handleChange, bg}) => {
           pointerEvents="none"
           children={<FaSearch color="gray.300" />}
         />
-        <Input placeholder=" Search for a country..." variant="outline" value={value} onChange={handleChange}  />
+        <Input 
+        placeholder=" Search for a country..." 
+        variant="outline" 
+        type='search'
+        value={value} 
+        onChange={handleChange}  />
       </InputGroup>
     </>
   )

@@ -9,7 +9,7 @@ const Header = () => {
   return (
     <>
       <Flex 
-      px={16}
+      px={10}
       py={4}
       bg={bg}
       boxShadow='md'

@@ -9,7 +9,7 @@ const Card = ({ flag, name, population, region, capital }) => {
       <WrapItem>
 
         <Box w="250px" boxShadow='md' borderRadius='5px' overflow='hidden' bg={bgColor[colorMode]}>
-          <Image w='100%' h='150px' objectFit='cover' src={flag} alt={name} />
+          <Image w='100%' h='150px' objectFit='cover' src={flag} alt={name}  />
           <Box p={5}>
             <Stack>
               <Text mb="2" as="h3" fontSize="lg" fontWeight='bold'> {name} </Text>
