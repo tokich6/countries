@@ -7,6 +7,7 @@ import {
 import Header from './components/Header';
 import Search from './components/Search';
 import Card from './components/Card';
+import CountryPage from './components/CountryPage';
 import Fonts from "./styles/Fonts";
 import { customTheme } from "./styles/theme";
 
@@ -20,7 +21,7 @@ function App() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await fetch('https://restcountries.eu/rest/v2/all?fields=flag;name;population;region;capital;nativeName;subRegion;currencies;languages;topLevelDomain;borders');
+        const response = await fetch('https://restcountries.eu/rest/v2/all?fields=flag;name;population;region;capital;nativeName;subRegion;currencies;languages;topLevelDomain;borders;alpha2Code');
         const data = await response.json();
         return setCountries(data);
       } catch (err){
@@ -67,11 +68,14 @@ function App() {
     setIsFiltered(true);
   }
 
-
   function formatNumber(num) {
     return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
   }
-
+  const onShowCountry = (code) =>  {
+    console.log(`${code} clicked`);
+    //logic to be added 
+  }
+  
   const generateCards = (arr) => {
     return arr.map((el, index) => {
       return (
@@ -82,6 +86,7 @@ function App() {
           population={formatNumber(el.population)}
           region={el.region}
           capital={el.capital}
+          onClick={() => onShowCountry(el.alpha2Code)}
         />
       )
     })
