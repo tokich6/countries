@@ -49,7 +49,7 @@ function App() {
         return el.name.toLowerCase().indexOf(country.toLowerCase()) !== -1;
       }
     })
-    if (filteredByCountry.length > 0) {
+    if (filteredByCountry.length >= 0) {
       setFilteredCountries(filteredByCountry);
     } else {
       setIsFiltered(false);
