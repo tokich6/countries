@@ -3,7 +3,7 @@ import { Select } from "@chakra-ui/react";
 const Regions = ({regionValue, handleRegion, bg }) => {
   return (
     <>
-      <Select placeholder="Filter by Region" value={regionValue} onChange={handleRegion} bg={bg} boxShadow='sm'>
+      <Select placeholder="All" value={regionValue} onChange={handleRegion} bg={bg} boxShadow='sm'>
         <option value="Africa">Africa</option>
         <option value="Americas">Americas</option>
         <option value="Asia">Asia</option>

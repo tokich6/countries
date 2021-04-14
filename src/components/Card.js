@@ -9,7 +9,7 @@ const Card = ({ flag, name, population, region, capital, onClick }) => {
       <WrapItem>
 
         <Box w="250px" boxShadow='md' borderRadius='5px' overflow='hidden' bg={bgColor[colorMode]}
-          _hover={{ transform: 'scale(1.1)', transition: '0.4s' }}
+          _hover={{ transform: 'scale(1.1)', transition: '0.4s', cursor:'pointer' }}
           onClick={onClick}>
           <Image w='100%' h='150px' objectFit='cover' src={flag} alt={name} />
           <Box p={5}>

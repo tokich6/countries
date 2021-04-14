@@ -3,7 +3,9 @@ import {
   ChakraProvider,
   Wrap,
   Container,
+  Spinner
 } from '@chakra-ui/react';
+// import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Header from './components/Header';
 import Search from './components/Search';
 import Card from './components/Card';
@@ -17,23 +19,27 @@ function App() {
   const [isFiltered, setIsFiltered] = useState(false);
   const [country, setCountry] = useState("");
   const [region, setRegion] = useState("");
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     async function fetchData() {
       try {
+        setLoading(true);
         const response = await fetch('https://restcountries.eu/rest/v2/all?fields=flag;name;population;region;capital;nativeName;subRegion;currencies;languages;topLevelDomain;borders;alpha2Code');
         const data = await response.json();
+        setLoading(false);
         return setCountries(data);
-      } catch (err){
-       console.log(err);
+      } catch (err) {
+        setLoading(false);
+        console.log(err);
       }
     }
     fetchData();
   }, []);
-/* eslint-disable react-hooks/exhaustive-deps */
+  /* eslint-disable react-hooks/exhaustive-deps */
   useEffect(() => {
     const filteredByRegion = countries.filter(el => {
-        return region !== '' && el.region === region;
+      return region !== '' && el.region === region;
     })
     if (filteredByRegion.length > 0) {
       setFilteredCountries(filteredByRegion);
@@ -71,11 +77,27 @@ function App() {
   function formatNumber(num) {
     return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
   }
-  const onShowCountry = (code) =>  {
-    console.log(`${code} clicked`);
-    //logic to be added 
+
+  async function fetchCountry(countryCode) {
+    try {
+      setLoading(true);
+      const response = await fetch(`https://restcountries.eu/rest/v2/alpha/${countryCode}`);
+      const data = await response.json();
+      setLoading(false);
+      console.log(data);
+    } catch (e) {
+      setLoading(false);
+      console.log(e);
+    }
   }
-  
+
+  const onShowCountry = (code) => {
+    console.log(`${code} clicked`);
+    fetchCountry(code);
+  }
+
+
+
   const generateCards = (arr) => {
     return arr.map((el, index) => {
       return (
@@ -91,7 +113,7 @@ function App() {
       )
     })
   }
-  
+
   return (
     <ChakraProvider theme={customTheme}>
       <Fonts />
@@ -99,9 +121,13 @@ function App() {
       <Container maxW="container.xl" centerContent >
         <Search country={country} region={region} handleCountry={getCountry} handleRegion={getRegion} />
         <Wrap spacing="50px" justify="center" mt='5'>
-          {
+        {
+          loading ?  <Spinner size="xl" /> :
+          (
             !isFiltered ? generateCards(countries) : generateCards(filteredCountries)
-          }
+          )
+        }
+         
         </Wrap>
       </Container>
     </ChakraProvider>
