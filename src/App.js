@@ -3,15 +3,16 @@ import {
   ChakraProvider,
   Wrap,
   Container,
-  Spinner
+  Spinner,
 } from '@chakra-ui/react';
-// import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { Router, Route, Switch } from 'react-router-dom';
 import Header from './components/Header';
 import Search from './components/Search';
 import Card from './components/Card';
 import CountryPage from './components/CountryPage';
 import Fonts from "./styles/Fonts";
 import { customTheme } from "./styles/theme";
+import history from './history';
 
 function App() {
   const [countries, setCountries] = useState([]);
@@ -84,6 +85,10 @@ function App() {
       const response = await fetch(`https://restcountries.eu/rest/v2/alpha/${countryCode}`);
       const data = await response.json();
       setLoading(false);
+      history.push({
+        pathname: `/country/${countryCode}`,
+        countryDetails: data
+      });
       console.log(data);
     } catch (e) {
       setLoading(false);
@@ -91,12 +96,13 @@ function App() {
     }
   }
 
-  const onShowCountry = (code) => {
-    console.log(`${code} clicked`);
-    fetchCountry(code);
-  }
-
-
+  // const onShowCountry = (code) => {
+  //   console.log(`${code} clicked`);
+  //   fetchCountry(code);
+  //   return (
+  //     <CountryPage />
+  //   )
+  // }
 
   const generateCards = (arr) => {
     return arr.map((el, index) => {
@@ -108,29 +114,42 @@ function App() {
           population={formatNumber(el.population)}
           region={el.region}
           capital={el.capital}
-          onClick={() => onShowCountry(el.alpha2Code)}
+          onClick={() => {
+            fetchCountry(el.alpha2Code)
+          }}
         />
       )
     })
   }
 
   return (
-    <ChakraProvider theme={customTheme}>
-      <Fonts />
-      <Header />
-      <Container maxW="container.xl" centerContent >
-        <Search country={country} region={region} handleCountry={getCountry} handleRegion={getRegion} />
-        <Wrap spacing="50px" justify="center" mt='5'>
-        {
-          loading ?  <Spinner size="xl" /> :
-          (
-            !isFiltered ? generateCards(countries) : generateCards(filteredCountries)
-          )
-        }
-         
-        </Wrap>
-      </Container>
-    </ChakraProvider>
+    <Router history={history}>
+      <ChakraProvider theme={customTheme}>
+        <Fonts />
+        <Header />
+        <Switch>
+          <Route exact path='/'>
+            <Container maxW="container.xl" centerContent>
+              <Search country={country} region={region} handleCountry={getCountry} handleRegion={getRegion} />
+              <Wrap spacing="50px" justify="center" mt='5'>
+                {
+                  loading ? <Spinner size="xl" /> :
+                    (
+                      !isFiltered ? generateCards(countries) : generateCards(filteredCountries)
+                    )
+                }
+
+              </Wrap>
+            </Container>
+          </Route>
+          <Route path='/country/:code'>
+            <CountryPage />
+          </Route>
+
+        </Switch>
+
+      </ChakraProvider>
+    </Router>
   );
 }
 
