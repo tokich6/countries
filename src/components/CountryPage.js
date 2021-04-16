@@ -1,5 +1,5 @@
 import { Container, Wrap } from "@chakra-ui/react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useColorMode } from "react";
 import { useLocation, useParams } from 'react-router-dom';
 import history from '../history';
 import Country from './Country'
@@ -9,6 +9,7 @@ const CountryPage = () => {
   const location = useLocation();
   // const { code } = useParams();
   const [details, setDetails] = useState({});
+ 
 
   useEffect(() => {
     setDetails(location.countryDetails); 

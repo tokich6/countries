@@ -96,14 +96,6 @@ function App() {
     }
   }
 
-  // const onShowCountry = (code) => {
-  //   console.log(`${code} clicked`);
-  //   fetchCountry(code);
-  //   return (
-  //     <CountryPage />
-  //   )
-  // }
-
   const generateCards = (arr) => {
     return arr.map((el, index) => {
       return (
