@@ -13,6 +13,7 @@ import CountryPage from './components/CountryPage';
 import Fonts from "./styles/Fonts";
 import { customTheme } from "./styles/theme";
 import history from './history';
+import { formatNumber } from './helpers';
 
 function App() {
   const [countries, setCountries] = useState([]);
@@ -75,26 +76,12 @@ function App() {
     setIsFiltered(true);
   }
 
-  function formatNumber(num) {
-    return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
-  }
+   function goToCountryRoute(countryCode) {
+    history.push({
+      pathname: `/country/${countryCode}`
+    });
+   } 
 
-  async function fetchCountry(countryCode) {
-    try {
-      setLoading(true);
-      const response = await fetch(`https://restcountries.eu/rest/v2/alpha/${countryCode}`);
-      const data = await response.json();
-      setLoading(false);
-      history.push({
-        pathname: `/country/${countryCode}`,
-        countryDetails: data
-      });
-      console.log(data);
-    } catch (e) {
-      setLoading(false);
-      console.log(e);
-    }
-  }
 
   const generateCards = (arr) => {
     return arr.map((el, index) => {
@@ -107,7 +94,7 @@ function App() {
           region={el.region}
           capital={el.capital}
           onClick={() => {
-            fetchCountry(el.alpha2Code)
+            goToCountryRoute(el.alpha2Code)
           }}
         />
       )
