@@ -9,7 +9,7 @@ This is a solution to the [REST Countries API with color theme switcher challeng
   - [Screenshot](#screenshot)
   - [Links](#links)
 - [My process](#my-process)
-  - [React & Chakra UI](#built-with)
+  - [Built with](#built-with)
   - [Continued development](#continued-development)
   - [Useful resources](#useful-resources)
 - [Author](#author)
