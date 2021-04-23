@@ -56,7 +56,7 @@ Then crop/optimize/edit your image however you like, add it to your project, and
 
 ### What I learned
 
-I used React Router and Chakra UI for the first time so that was definitely something worth mentioning. The light and dark themes come out of the ox with Chakra UI. 
+I used React Router and Chakra UI for the first time so that is definitely something worth mentioning. The light and dark themes come out of the ox with Chakra UI. 
 
 
 ### Continued development
