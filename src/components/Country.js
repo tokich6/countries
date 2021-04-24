@@ -15,7 +15,7 @@ const Country = ({ flag, name, nativeName, population, region, subRegion, capita
         <SimpleGrid columns={[1, null, 2]} spacing={20}>
           <Image w='100%' h='100%' objectFit='cover' boxShadow='md' src={flag} alt={name} />
           <Box p={5}>
-            <Heading mb="2" fontSize="lg" fontWeight='bold'> {name} </Heading>
+            <Heading mb="4" as="h1" fontSize="lg" fontWeight='bold'> {name} </Heading>
             <SimpleGrid columns={[1, null, 2]} spacing={10} >
               <Stack>
                 <Text fontSize="sm"> <Text as='span' fontWeight='semibold'>Native Name: </Text> {nativeName} </Text>
@@ -31,7 +31,7 @@ const Country = ({ flag, name, nativeName, population, region, subRegion, capita
               </Stack>
             </SimpleGrid>
 
-            <Text mb="2" as="h4" fontSize="md" fontWeight='bold'> Border Countries: {borders} </Text>
+            <Text mb="2" mt="6" as="h4" fontSize="md" fontWeight='bold'> Border Countries: {borders} </Text>
 
           </Box>
         </SimpleGrid>
