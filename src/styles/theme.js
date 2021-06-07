@@ -18,7 +18,7 @@ const styles = {
 
 const components = {
   Drawer: {
-    // setup light/dark mode component defaults
+    // setup light/dark mode component defaults.
     baseStyle: props => ({
       dialog: {
         bg: mode('hsl(0, 0%, 100%)', 'hsl(209, 23%, 22%)')(props),
